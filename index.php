@@ -5,13 +5,18 @@
 <script>
 $(document).ready(function(){
     $("button").click(function(){
-        $.getJSON("info.json", function(result){
-		console.log(result);
-            $.each(result, function(i, field){
-		    // Each i is one element from JSON object in .json file
-                $("div").append(field + "<hr>");
-            });
-        });
+        
+	$.getJSON( "info.json", function( data ) {
+  		var items = [];
+  		$.each( data, function( key, val ) {
+    			items.push( "<li id='" + key + "'>" + val + "</li>" );
+  		});
+ 
+  		$( "<ul/>", {
+    			"class": "my-new-list",
+    			html: items.join( "" )
+  			}).appendTo( "body" );
+	});
         $("button").hide();
     });
 });
